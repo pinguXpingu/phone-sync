@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>phone.png</file>
+        <file>sync.png</file>
     </qresource>
 </RCC>
