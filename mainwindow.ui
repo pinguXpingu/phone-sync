@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>780</width>
-    <height>510</height>
+    <width>772</width>
+    <height>505</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>500</width>
-    <height>500</height>
+    <width>772</width>
+    <height>505</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>923</width>
-    <height>740</height>
+    <width>772</width>
+    <height>505</height>
    </size>
   </property>
   <property name="palette">
@@ -28,9 +28,9 @@
      <colorrole role="Text">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>115</red>
-        <green>210</green>
-        <blue>22</blue>
+        <red>255</red>
+        <green>239</green>
+        <blue>165</blue>
        </color>
       </brush>
      </colorrole>
@@ -48,9 +48,9 @@
      <colorrole role="Text">
       <brush brushstyle="SolidPattern">
        <color alpha="255">
-        <red>115</red>
-        <green>210</green>
-        <blue>22</blue>
+        <red>255</red>
+        <green>239</green>
+        <blue>165</blue>
        </color>
       </brush>
      </colorrole>
@@ -87,7 +87,11 @@
    </palette>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>pinguX phone Sync</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="kaynak.qrc">
+    <normaloff>:/sync.png</normaloff>:/sync.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="enabled">
@@ -369,9 +373,9 @@
               <colorrole role="Text">
                <brush brushstyle="SolidPattern">
                 <color alpha="255">
-                 <red>138</red>
-                 <green>226</green>
-                 <blue>52</blue>
+                 <red>255</red>
+                 <green>239</green>
+                 <blue>165</blue>
                 </color>
                </brush>
               </colorrole>
@@ -398,9 +402,9 @@
               <colorrole role="Text">
                <brush brushstyle="SolidPattern">
                 <color alpha="255">
-                 <red>138</red>
-                 <green>226</green>
-                 <blue>52</blue>
+                 <red>255</red>
+                 <green>239</green>
+                 <blue>165</blue>
                 </color>
                </brush>
               </colorrole>
