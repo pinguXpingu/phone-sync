@@ -9,11 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
     if(QDir(yol).exists())
     {
         ui->pushButton_3->setText("Ayır");
-        ui->textBrowser->append("###BAĞLI###");
-    }
-    else
-    {
-        ui->pushButton_3->setText("Bağla");
+        ui->textBrowser->append("Bağlı");
     }
 }
 
@@ -22,45 +18,65 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
 void MainWindow::on_pushButton_3_clicked()
 {
-    if(ui->pushButton_3->text()=="Ayır")
+    QProcess *prosess=new QProcess;
+    if(prosess)
     {
-        proses->execute("gio mount -u ftp://172.27.0.152:2557");
-        ui->textBrowser->append("###AYRILDI###");
-        ui->pushButton_3->setText("Bağla");
-    }
-    else
-    {
-        proses->execute("gio mount ftp://172.27.0.152:2557");
-        ui->textBrowser->append("###BAĞLANDI###");
-        ui->pushButton_3->setText("Ayır");
+        prosess->setEnvironment( QProcess::systemEnvironment());
+        prosess->setProcessChannelMode( QProcess::MergedChannels);
+
+        if (ui->pushButton_3->text()=="Ayır")
+        {
+            prosess->start("gio", QStringList() << "mount" << "-u" << "ftp://172.27.0.152:2557");
+        }
+        else
+        {
+            prosess->start("gio", QStringList() << "mount" << "ftp://172.27.0.152:2557");
+        }
+
+        prosess->waitForStarted();
+        connect(prosess,SIGNAL(readyRead()),this,SLOT(readOut()));
+        connect(prosess,SIGNAL(finished(int)),this,SLOT(pushButton_text()));
     }
 }
 
 void MainWindow::on_pushButton_2_clicked()
-{
-    //proses->execute("clear");
-    if (proses)
+{    
+    QProcess *proses=new QProcess;
+    if(!QDir(yol).exists())
     {
-      proses->setEnvironment( QProcess::systemEnvironment() );
-      proses->setProcessChannelMode( QProcess::MergedChannels );
+        ui->textBrowser->append("<span style=\"color:fuchsia;\">Bağlı değil ki</span>");
+    }
+    else
+    {
+        if (proses)
+        {
+            ui->textBrowser->append("<span style=\"color:deepskyblue;\">####################EŞİTLENİYOR##################</span>");
+            ui->pushButton_3->setDisabled(true);
+            ui->pushButton_2->setDisabled(true);
+            proses->setEnvironment( QProcess::systemEnvironment());
+            proses->setProcessChannelMode( QProcess::MergedChannels);
 
-      proses->start( "echo", QStringList() << "oldu bu iş" );
-      proses->waitForStarted();
+            proses->setWorkingDirectory(yol);
+            proses->start("sh",QStringList() << "yedekle.sh");
 
-      connect( proses, SIGNAL(readyReadStandardOutput()), this, SLOT(readOut()) );
-      connect( proses, SIGNAL(readyReadStandardError()), this, SLOT(readErr()) );
+
+            proses->waitForStarted();
+            connect(proses,SIGNAL(readyReadStandardOutput()),this,SLOT(readOut()));
+            connect(proses,SIGNAL(readyReadStandardError()),this,SLOT(readErr()));
+            connect(proses,SIGNAL(readChannelFinished()),this,SLOT(msg()));
+        }
     }
 }
 
 void MainWindow::readOut()
 {
     QProcess *p = dynamic_cast<QProcess *>(sender());
-
     if (p)
-      ui->textBrowser->append(p->readAllStandardOutput());
+    {
+        ui->textBrowser->append(p->readAllStandardOutput());
+    }
 }
 
 void MainWindow::readErr()
@@ -79,6 +95,30 @@ void MainWindow::on_pushButton_clicked()
     }
     else
     {
-        ui->textBrowser->append("###BAĞLI DEĞİLKİ###");
+        ui->textBrowser->append("<span style=\"color:fuchsia;\">Bağlı değil ki</span>");
     }
+}
+
+void MainWindow::pushButton_text()
+{
+    for (int i=0; i<10;i++)
+    {
+        if(QDir(yol).exists())
+        {
+            ui->pushButton_3->setText("Ayır");
+            if (i==9) ui->textBrowser->append("<span style=\"color:greenyellow;\">#####################BAĞLANDI###################</span>");
+        }
+        else
+        {
+            ui->pushButton_3->setText("Bağla");
+            if (i==9) ui->textBrowser->append("<span style=\"color:red;\">######################AYRILDI####################</span>");
+        }
+    }
+}
+
+void MainWindow::msg()
+{
+    ui->textBrowser->append("<span style=\"color:deepskyblue;\">######################BİTTİ######################</span>");
+    ui->pushButton_3->setEnabled(true);
+    ui->pushButton_2->setEnabled(true);
 }

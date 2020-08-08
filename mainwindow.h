@@ -5,6 +5,7 @@
 #include <QProcess>
 #include <QDebug>
 #include <QDir>
+#include <QThread>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -23,12 +24,12 @@ private slots:
     void on_pushButton_2_clicked();
     void readOut();
     void readErr();
-
     void on_pushButton_clicked();
+    void pushButton_text();
+    void msg();
 
 private:
     Ui::MainWindow *ui;
-    QProcess *proses=new QProcess;
     QString yol="/run/user/2203/gvfs/ftp:host=172.27.0.152,port=2557";
 };
 #endif // MAINWINDOW_H
