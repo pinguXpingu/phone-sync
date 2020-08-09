@@ -52,7 +52,7 @@ void MainWindow::on_pushButton_2_clicked()
     {
         if (proses)
         {
-            ui->textBrowser->append("<span style=\"color:deepskyblue;\">####################EŞİTLENİYOR##################</span>");
+            ui->textBrowser->append("<span style=\"color:deepskyblue;\">###################EŞİTLENİYOR#################</span>");
             ui->pushButton_3->setDisabled(true);
             ui->pushButton_2->setDisabled(true);
             proses->setEnvironment( QProcess::systemEnvironment());
@@ -103,22 +103,25 @@ void MainWindow::pushButton_text()
 {
     for (int i=0; i<10;i++)
     {
-        if(QDir(yol).exists())
+        if(QDir(yol).exists() && i==9)
         {
             ui->pushButton_3->setText("Ayır");
-            if (i==9) ui->textBrowser->append("<span style=\"color:greenyellow;\">#####################BAĞLANDI###################</span>");
+            ui->textBrowser->append("<span style=\"color:greenyellow;\">####################BAĞLANDI##################</span>");
         }
         else
         {
-            ui->pushButton_3->setText("Bağla");
-            if (i==9) ui->textBrowser->append("<span style=\"color:red;\">######################AYRILDI####################</span>");
+            if (ui->pushButton_3->text()=="Ayır" && i==9)
+            {
+                ui->pushButton_3->setText("Bağla");
+                ui->textBrowser->append("<span style=\"color:red;\">#####################AYRILDI###################</span>");
+            }
         }
     }
 }
 
 void MainWindow::msg()
 {
-    ui->textBrowser->append("<span style=\"color:deepskyblue;\">######################BİTTİ######################</span>");
+    ui->textBrowser->append("<span style=\"color:deepskyblue;\">#####################BİTTİ#####################</span>");
     ui->pushButton_3->setEnabled(true);
     ui->pushButton_2->setEnabled(true);
 }
