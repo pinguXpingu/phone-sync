@@ -28,11 +28,11 @@ void MainWindow::on_pushButton_3_clicked()
 
         if (ui->pushButton_3->text()=="Ayır")
         {
-            prosess->start("gio", QStringList() << "mount" << "-u" << "ftp://172.27.0.152:2557");
+            prosess->start("gio", QStringList() << "mount" << "-u" << "ftp://pinguXmini.pinguX.net:2557");
         }
         else
         {
-            prosess->start("gio", QStringList() << "mount" << "ftp://172.27.0.152:2557");
+            prosess->start("gio", QStringList() << "mount" << "ftp://pinguXmini.pinguX.net:2557");
         }
 
         prosess->waitForStarted();
@@ -42,14 +42,14 @@ void MainWindow::on_pushButton_3_clicked()
 }
 
 void MainWindow::on_pushButton_2_clicked()
-{    
-    QProcess *proses=new QProcess;
+{
     if(!QDir(yol).exists())
     {
         ui->textBrowser->append("<span style=\"color:fuchsia;\">Bağlı değil ki</span>");
     }
     else
     {
+        QProcess *proses=new QProcess;
         if (proses)
         {
             ui->textBrowser->append("<span style=\"color:deepskyblue;\">###################EŞİTLENİYOR#################</span>");
@@ -59,7 +59,7 @@ void MainWindow::on_pushButton_2_clicked()
             proses->setProcessChannelMode( QProcess::MergedChannels);
 
             proses->setWorkingDirectory(yol);
-            proses->start("sh",QStringList() << "yedekle.sh");
+            proses->start("sh",QStringList() << "aTa/yedekle.sh");
 
 
             proses->waitForStarted();
@@ -91,7 +91,16 @@ void MainWindow::on_pushButton_clicked()
 {
     if(QDir(yol).exists())
     {
-        QProcess::execute("nautilus "+yol);
+        /*QProcess::execute("nautilus "+yol);*/
+
+        //QObject *obje;
+        QString program="nautilus";
+        QStringList argumanlar;
+        argumanlar << yol;
+
+        //QProcess *konumAc=new QProcess(obje);
+        QProcess *konumAc=new QProcess();
+        konumAc->start(program, argumanlar);
     }
     else
     {
