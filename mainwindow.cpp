@@ -28,11 +28,11 @@ void MainWindow::on_pushButton_3_clicked()
 
         if (ui->pushButton_3->text()=="Ayır")
         {
-            prosess->start("gio", QStringList() << "mount" << "-u" << "ftp://pinguXmini.pinguX.net:2557");
+            prosess->start("gio", QStringList() << "mount" << "-u" << "ftp://pinguXmini.pinguXnet:2557");
         }
         else
         {
-            prosess->start("gio", QStringList() << "mount" << "ftp://pinguXmini.pinguX.net:2557");
+            prosess->start("gio", QStringList() << "mount" << "ftp://pinguXmini.pinguXnet:2557");
         }
 
         prosess->waitForStarted();

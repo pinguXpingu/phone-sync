@@ -30,6 +30,6 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    QString yol="/run/user/2203/gvfs/ftp:host=pinguxmini.pingux.net,port=2557";
+    QString yol="/run/user/2203/gvfs/ftp:host=pinguxmini.pinguxnet,port=2557";
 };
 #endif // MAINWINDOW_H
