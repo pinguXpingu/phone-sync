@@ -106,12 +106,12 @@ void MainWindow::on_pushButton_2_clicked()
 */
             proses->start("/bin/bash",QStringList() << "-c" <<
 "$(mkdir -p $(xdg-user-dir DOWNLOAD)/pngtel); \
-son=$(cat Android/.sonsync | head -n1); \
+son=$(cat aTa/.local/share/.sonsync | head -n1); \
 simdi=$(date +%s); \
 dakika=$(((($simdi-$son)/60)+1)); \
 find "+dosyalar+" \
--cmin -$(echo $dakika) -exec cp --no-preserve=all --parents -vf {} $(xdg-user-dir DOWNLOAD)/pngtel \\;;\
-date +%s > Android/.sonsync; \
+! -path '*/.thumbnails/*' -cmin -$(echo $dakika) -exec cp --no-preserve=all --parents -vf {} $(xdg-user-dir DOWNLOAD)/pngtel \\;;\
+date +%s > aTa/.local/share/.sonsync; \
 find $(xdg-user-dir DOWNLOAD)/pngtel -type d -empty -delete");
 
             proses->waitForStarted();
