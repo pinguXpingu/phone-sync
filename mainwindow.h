@@ -21,11 +21,11 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButton_3_clicked();
-    void on_pushButton_2_clicked();
+    void on_sync_button_clicked();
+    void on_mount_button_clicked();
     void readOut();
     void readErr();
-    void on_pushButton_clicked();
+    void on_phone_button_clicked();
     void pushButton_text();
     void msg();
     void ayarlar();
@@ -34,7 +34,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    QString yol="/run/user/2203/gvfs/ftp:host=pinguxmini.pinguxnet,port=2557";
+    QString yol="/run/user/2203/gvfs/ftp:host=pinguxmini.pingux.ata,port=2557";
     QString yol2="/run/user/2203/gvfs/sftp:host=172.27.0.152,port=1743/pinguXmini";
     setting s;
 };
